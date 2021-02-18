@@ -1,0 +1,10 @@
+
+{% extends 'base.html' %}
+
+{% block content %}
+Bienvenido, {{ user.username|default:'Guest' }}!
+
+<h1><a href="{% url 'home' %}">Ingresar al tablero Covid</a></h1>
+
+{% endblock %}
+
