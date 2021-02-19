@@ -42,18 +42,36 @@ def register(request):
 
 
 def home(request):
-    import requests
-
-    url = "https://covid-19-data.p.rapidapi.com/country"
-
-    querystring = {"dropdown": "italy"}
+    url = "https://covid-193.p.rapidapi.com/statistics"
+    val = request.POST.get('dropdown')
+    #print(dict(countries)[val])
+    #try:
+     #   x = dict(countries)[val]
+    #except:
+     #   x= "India"
+    querystring = {"country" : val}
 
     headers = {
-        'x-rapidapi-key': "cb5a72895amshfe4c9b910ff10eep137693jsnf0f1a383cda0",
-        'x-rapidapi-host': "covid-19-data.p.rapidapi.com"
+        'x-rapidapi-host': "covid-193.p.rapidapi.com",
+        'x-rapidapi-key': "ea75790284mshc149cb256a0fafep18274djsn652e67f52063"
+        }
+
+    response = requests.request("GET", url, headers=headers, params = querystring).json()
+    data = response['response']
+    d = data[0]
+    print(d)
+    context = {
+        'all' : d['cases']['total'],
+        'recovered' : d['cases']['recovered'],
+        'deaths' : d['deaths']['total'],
+        'new' : d['cases']['new'],
+        'critical' : d['cases']['critical'],
+        'tests' : d['tests']['total'],
+        'day' : d['day'],
+        'time' : d['time'][11:],
+        'active' : d['cases']['active'],
+        'new_deaths' : d['deaths']['new'],
     }
 
-    response = requests.request("GET", url, headers=headers, params=querystring)
 
-    print(response.text)
-
+    return render(request, 'index.html', context)

@@ -1,6 +1,6 @@
 from django.conf.urls import include, url
 from webapp.views import dashboard, register, home
-from django.urls import path, include
+
 
 
 urlpatterns = [
