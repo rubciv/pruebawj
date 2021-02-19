@@ -1,4 +1,3 @@
-
 from django.contrib.auth import login
 
 from django.shortcuts import redirect, render
@@ -8,8 +7,6 @@ from django.urls import reverse
 from webapp.forms import CustomUserCreationForm
 
 import requests
-
-
 
 
 def dashboard(request):
@@ -48,7 +45,7 @@ def home(request):
     #try:
      #   x = dict(countries)[val]
     #except:
-     #   x= "India"
+     #   x= "Colombia"
     querystring = {"country" : val}
 
     headers = {
@@ -74,4 +71,4 @@ def home(request):
     }
 
 
-    return render(request, 'index.html', context)
+    return render(request, 'covid.html', context)
